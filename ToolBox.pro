@@ -2,8 +2,11 @@ TEMPLATE = subdirs
 CONFIG += ordered
 
 SUBDIRS += \
+    MyShareLibrary \
     PluginWidget \
+    UDP \
     RegExp \
-    App
+    App \
 
 
+#include(../MyShareLibrary/MyShareLibrary.pri)

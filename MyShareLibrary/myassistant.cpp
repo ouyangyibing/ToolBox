@@ -1,16 +1,20 @@
 #include "myassistant.h"
+#include <QDir>
 #include <QFile>
 #include <QDebug>
+#include <QFileInfo>
+#include <QMessageBox>
 #include <QTextStream>
 
-bool my::readFile(const QString &path, QString &data)
+bool my::readFile(const QString &name, QString &data)
 {
-    QFile file(path);
+    QFile file(name);
     if(!file.exists()) {
         return false;
     }
 
     if(!file.open(QFile::ReadOnly)) {
+        QMessageBox::critical(NULL, "提示", QString("%1: %2").arg("读取失败", name));
         file.close();
         return false;
     }
@@ -20,24 +24,39 @@ bool my::readFile(const QString &path, QString &data)
     file.close();
     return true;
 }
-/*
-QString sFilePath = "C:\\test.txt";
 
-QFile file(sFilePath);
-//方式：Append为追加，WriteOnly，ReadOnly
-if (!file.open(QIODevice::WriteOnly|QIODevice::Text)) {
-    QMessageBox::critical(NULL, "提示", "无法创建文件");
-    return -1;
-}
-QTextStream out(&file);
-out<<"要写入内容"<<endl;
-out.flush();
-file.close();
-
-//注意写入方式的选择，注意写完后的关闭操作！
-*/
-
-bool my::writeFile(const QString &path, const QString &data)
+QString my::readFile(const QString &name)
 {
+    QString buf;
+    readFile(name, buf);
+    return buf;
+}
 
+bool my::writeFile(const QString &name, const QByteArray &data, const QIODevice::OpenMode flags)
+{
+    QFileInfo fileInfo(name);
+    QString path = fileInfo.path();
+
+    if(!QFile::exists(path)) {
+        if(! QDir().mkpath(path)) {
+            QMessageBox::critical(NULL, "提示", QString("%1: %2").arg("无法创建文件夹", path));
+        }
+    }
+
+    QFile file(name);
+    if ( !file.open(flags)) {
+        QMessageBox::critical(NULL, "提示", QString("%1: %2").arg("无法创建文件", name));
+    }
+
+    QTextStream out(&file);
+    out << data ;
+    out.flush();
+    file.close();
+
+    return true;
+}
+
+bool my::appendFileData(const QString &name, const QByteArray &data)
+{
+    return writeFile(name, data, QIODevice::WriteOnly|QIODevice::Text|QIODevice::Append);
 }

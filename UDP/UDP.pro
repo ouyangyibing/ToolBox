@@ -1,12 +1,14 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2019-03-26T14:20:14
+# Project created by QtCreator 2019-04-08T10:28:20
 #
 #-------------------------------------------------
 
-QT       += core gui widgets
+QT       += core gui network
 
-TARGET = RegExp
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
+TARGET = UDP
 TEMPLATE = lib
 CONFIG += plugin
 
@@ -21,17 +23,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+
 SOURCES += \
-    regexp.cpp
+        udp.cpp
 
 HEADERS += \
-    regexp.h
+        udp.h
 
 FORMS += \
-    regexp.ui
+        udp.ui
 
 
-DISTFILES += RegExp.json
+DISTFILES += RegExp.json \
+    UDP.json
 
 unix {
     target.path = /usr/lib

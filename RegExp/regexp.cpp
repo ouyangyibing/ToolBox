@@ -9,7 +9,6 @@
 #include <QRegularExpression>
 
 namespace  {
-
 const QString configPath = "./Configuration/RegExp/";
 
 QString patternToCode(QString pattern)
@@ -19,41 +18,22 @@ QString patternToCode(QString pattern)
     return pattern;
 }
 
-void writeConfigFile(QString txt,QString name)
+void writeConfigFile(QString txt, QString name)
 {
-    if(!QFile::exists(configPath)) {
-        QDir().mkpath(configPath);
-    }
-
-    QFile file(configPath + name);
-    if (file.open(QIODevice::WriteOnly|QIODevice::Text)) {
-        file.write(txt.toLocal8Bit());
-    }
-    file.close();
+    my::writeFile(configPath + name, txt.toLocal8Bit());
 }
 
 QString readConfigFile(QString name)
 {
-    QString buf;
-    QString path = QString("%1%2").arg(configPath, name);
-    if(!my::readFile(path, buf)) {
-        qDebug()<< "该文件打开失败: " << path << endl;
-        return "";
-    }
-    return buf;
+    return my::readFile(configPath + name);
 }
-
-}
-//namespace end
-RegExp* RegExp::self = nullptr;
+}//namespace end
 
 RegExp::RegExp(QWidget *parent) :
     PluginWidget(parent),
     ui(new Ui::RegExp)
 {
     ui->setupUi(this);
-
-    self = this;
 
     connect(ui->refresh, &QToolButton::clicked, this, &RegExp::slot_regExp);
     connect(ui->patternLineEdit, &QLineEdit::textChanged, this, &RegExp::slot_regExp);
@@ -82,12 +62,6 @@ RegExp::~RegExp()
 
 RegExp *RegExp::newObj()
 {
-    return staticNewObj();
-}
-
-
-RegExp *RegExp::staticNewObj()
-{
     static bool flag = false;
 
     if(flag) {
@@ -95,10 +69,9 @@ RegExp *RegExp::staticNewObj()
 
     } else {
         flag = true;
-        return self;
+        return this;
     }
 }
-
 
 void RegExp::slot_regExp()
 {

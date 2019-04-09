@@ -26,9 +26,6 @@ private slots:
 
 private:
     Ui::RegExp *ui;
-
-    static RegExp *staticNewObj();
-    static RegExp *self;
 };
 
 #endif // REGEXP_H

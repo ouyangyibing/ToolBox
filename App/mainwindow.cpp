@@ -2,15 +2,14 @@
 #include "ui_mainwindow.h"
 #include "pluginwidget.h"
 #include <QDir>
-#include <QHash>
 #include <QDebug>
-#include <QTimer>
 #include <QAction>
 #include <QLibrary>
 #include <QFileInfo>
-#include <QEventLoop>
 #include <QJsonObject>
 #include <QPluginLoader>
+
+#include "test.h"
 
 QHash<QString, QString> pluginPath;
 QHash<PluginWidget*, QPluginLoader*> plugins;
@@ -20,6 +19,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    //平时需要debug 的代码就可以在这个类里面，省的影响别的代码
+    new Test(this);
 
     QDir pluginDir(qApp->applicationDirPath());
     pluginDir.cd("plugins");

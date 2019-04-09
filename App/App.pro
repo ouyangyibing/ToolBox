@@ -25,10 +25,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    test.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    test.h
 
 FORMS += \
         mainwindow.ui
@@ -37,3 +39,5 @@ DESTDIR = ../bin
 
 INCLUDEPATH += $$PWD/../PluginWidget
 
+INCLUDEPATH += $$PWD/../MyShareLibrary
+LIBS += -L$$PWD/../../build/ToolBox/bin/ -lMyShareLibrary
