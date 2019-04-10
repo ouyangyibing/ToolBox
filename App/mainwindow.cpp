@@ -47,7 +47,7 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     for(auto unloade : plugins) {
-        qDebug()<< unloade->unload();
+        unloade->unload();
     }
 
     delete ui;

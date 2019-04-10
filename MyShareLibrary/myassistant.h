@@ -7,8 +7,13 @@
 //MyAssistant
 namespace my {
 
+/*************
+ * 获取系统时间
+ ************/
+QString  getCurentTime(const QString &format = "yyyy-MM-dd hh:mm:ss");
+
 /**********************************
- *读取文件数据
+ * 读取文件数据
  * name: 需要读取的文件名
  * data: 引用，将读取的数据赋值于该引用
  * return: 读取成功或者失败

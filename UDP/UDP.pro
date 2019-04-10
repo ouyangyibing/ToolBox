@@ -34,8 +34,7 @@ FORMS += \
         udp.ui
 
 
-DISTFILES += RegExp.json \
-    UDP.json
+DISTFILES += UDP.json
 
 unix {
     target.path = /usr/lib
@@ -44,10 +43,10 @@ unix {
 
 DESTDIR = ../bin/plugins
 
-DEPENDPATH += $$PWD/../../build/ToolBox/bin
+DEPENDPATH += ../bin
 
 INCLUDEPATH += $$PWD/../PluginWidget
-LIBS += -L$$PWD/../../build/ToolBox/bin/ -lPluginWidget
+LIBS += -L../bin/ -lPluginWidget
 
 INCLUDEPATH += $$PWD/../MyShareLibrary
-LIBS += -L$$PWD/../../build/ToolBox/bin/ -lMyShareLibrary
+LIBS += -L../bin/ -lMyShareLibrary

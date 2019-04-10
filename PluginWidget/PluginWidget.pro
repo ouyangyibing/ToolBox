@@ -28,11 +28,10 @@ SOURCES += \
 
 HEADERS += \
     pluginwidget.h \
-#    pluginwidget_global.h
 
 unix {
     target.path = /usr/lib
     INSTALLS += target
 }
 
-DESTDIR += ../bin
+DESTDIR = ../bin

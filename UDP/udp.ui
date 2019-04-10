@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>567</width>
-    <height>492</height>
+    <width>717</width>
+    <height>546</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,29 +15,22 @@
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="1" column="2">
-    <widget class="QGroupBox" name="groupBox_2">
+    <widget class="QGroupBox" name="groupBox_send">
      <property name="title">
       <string/>
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
-      <item row="1" column="2">
+      <item row="0" column="0" rowspan="2">
+       <widget class="QTextEdit" name="sendData"/>
+      </item>
+      <item row="1" column="1">
        <widget class="QPushButton" name="send">
         <property name="text">
          <string>发送</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="0" rowspan="2" colspan="2">
-       <widget class="QLineEdit" name="sendData">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2">
+      <item row="0" column="1">
        <widget class="QPushButton" name="broadcast">
         <property name="text">
          <string>广播</string>
@@ -65,7 +58,7 @@
       <string/>
      </property>
      <layout class="QGridLayout" name="gridLayout_5">
-      <item row="3" column="0">
+      <item row="4" column="1">
        <widget class="QLineEdit" name="srvPort">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -74,18 +67,58 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>6000</string>
+         <string>23232</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="0">
+      <item row="3" column="1">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>远程端口</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
        <widget class="QLabel" name="label">
         <property name="text">
          <string>远程IP地址</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="1">
+      <item row="4" column="0">
+       <widget class="QLineEdit" name="srvIp">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>127.0.0.1</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLineEdit" name="cltPort">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>23232</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>监听端口</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
        <widget class="QPushButton" name="bind">
         <property name="text">
          <string>监听</string>
@@ -95,52 +128,19 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="1">
-       <widget class="QLineEdit" name="cltPort">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>6000</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>远程端口</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>监听端口</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLineEdit" name="srvIp">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>192.168.102.205</string>
-        </property>
-       </widget>
-      </item>
      </layout>
     </widget>
    </item>
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>srvPort</tabstop>
+  <tabstop>sendData</tabstop>
+  <tabstop>broadcast</tabstop>
+  <tabstop>send</tabstop>
+  <tabstop>recevieData</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

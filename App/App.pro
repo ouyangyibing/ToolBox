@@ -40,4 +40,4 @@ DESTDIR = ../bin
 INCLUDEPATH += $$PWD/../PluginWidget
 
 INCLUDEPATH += $$PWD/../MyShareLibrary
-LIBS += -L$$PWD/../../build/ToolBox/bin/ -lMyShareLibrary
+LIBS += -L../bin/ -lMyShareLibrary

@@ -3,6 +3,7 @@
 #include <QFile>
 #include <QDebug>
 #include <QFileInfo>
+#include <QDateTime>
 #include <QMessageBox>
 #include <QTextStream>
 
@@ -59,4 +60,9 @@ bool my::writeFile(const QString &name, const QByteArray &data, const QIODevice:
 bool my::appendFileData(const QString &name, const QByteArray &data)
 {
     return writeFile(name, data, QIODevice::WriteOnly|QIODevice::Text|QIODevice::Append);
+}
+
+QString my::getCurentTime(const QString &format)
+{
+    return QDateTime::currentDateTime().toString(format);
 }

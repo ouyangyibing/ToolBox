@@ -40,10 +40,10 @@ unix {
 
 DESTDIR = ../bin/plugins
 
-DEPENDPATH += $$PWD/../../build/ToolBox/bin
+DEPENDPATH += ../bin
 
 INCLUDEPATH += $$PWD/../PluginWidget
-LIBS += -L$$PWD/../../build/ToolBox/bin/ -lPluginWidget
+LIBS += -L../bin/ -lPluginWidget
 
 INCLUDEPATH += $$PWD/../MyShareLibrary
-LIBS += -L$$PWD/../../build/ToolBox/bin/ -lMyShareLibrary
+LIBS += -L../bin/ -lMyShareLibrary

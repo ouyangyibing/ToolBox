@@ -27,13 +27,10 @@ SOURCES += \
 
 HEADERS += \
         myassistant.h \
-        #mysharelibrary_global.h
 
 unix {
     target.path = /usr/lib
     INSTALLS += target
 }
 
-DESTDIR += ../bin
-
-INCLUDEPATH += $$PWD/
+DESTDIR = ../bin

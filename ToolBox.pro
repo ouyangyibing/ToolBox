@@ -7,6 +7,3 @@ SUBDIRS += \
     UDP \
     RegExp \
     App \
-
-
-#include(../MyShareLibrary/MyShareLibrary.pri)

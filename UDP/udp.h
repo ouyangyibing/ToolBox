@@ -2,6 +2,7 @@
 #define UDP_H
 
 #include <QWidget>
+#include <QHostAddress>
 #include "pluginwidget.h"
 
 class QUdpSocket;
@@ -36,9 +37,13 @@ private:
     QUdpSocket *socket;
 
     bool isBind = true;
+    QHostAddress serverAddress;
+    quint16 serverPort;
 
-    bool openSocket();
+    bool bindSocket();
     void closeSocket();
+    void bindSocket_ui();
+    void init_ui();
 };
 
 #endif // UDP_H
