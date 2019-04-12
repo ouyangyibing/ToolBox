@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+class QPluginLoader;
+
 namespace Ui {
 class MainWindow;
 }
@@ -20,6 +22,8 @@ public slots:
 
 private:
     Ui::MainWindow *ui;
+
+    QPluginLoader *loader;
 };
 
 #endif // MAINWINDOW_H

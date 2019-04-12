@@ -12,7 +12,7 @@
 #include "test.h"
 
 QHash<QString, QString> pluginPath;
-QHash<PluginWidget*, QPluginLoader*> plugins;
+QList<PluginWidget*> plugins;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -23,7 +23,10 @@ MainWindow::MainWindow(QWidget *parent) :
     //平时需要debug 的代码就可以在这个类里面，省的影响别的代码
     new Test(this);
 
-    QDir pluginDir(qApp->applicationDirPath());
+    loader = new QPluginLoader(this);
+
+    QDir pluginDir;
+    pluginDir.setPath(qApp->applicationDirPath());
     pluginDir.cd("plugins");
 
     for(QFileInfo info : pluginDir.entryInfoList(QStringList("*.dll"), QDir::Files)) {
@@ -31,8 +34,8 @@ MainWindow::MainWindow(QWidget *parent) :
         if (!QLibrary::isLibrary(info.absoluteFilePath()))
             continue;
 
-        QPluginLoader loader(info.absoluteFilePath());
-        QJsonObject json = loader.metaData().value("MetaData").toObject();
+        loader->setFileName(info.absoluteFilePath());
+        QJsonObject json = loader->metaData().value("MetaData").toObject();
         QString name = json.value("name").toString();
         QAction *action = new QAction(name, ui->mainToolBar);
         action->setObjectName(name);
@@ -40,33 +43,36 @@ MainWindow::MainWindow(QWidget *parent) :
         connect(action, &QAction::triggered, this, &MainWindow::slot_newInstance);
 
         pluginPath.insert(name, info.absoluteFilePath());
-        loader.unload();
+        loader->unload();
     }
 }
 
 MainWindow::~MainWindow()
 {
-    for(auto unloade : plugins) {
-        unloade->unload();
-    }
+    for(auto plugin : plugins)
+       delete plugin;
 
     delete ui;
 }
 
 void MainWindow::slot_newInstance()
 {
-    QAction *action = qobject_cast<QAction*>(sender());
+    QString path;
+    QAction *action;
+    PluginWidget *plugin;
 
-    auto path = pluginPath.value(action->objectName());
-    auto *loader = new QPluginLoader(path);
+    action = qobject_cast<QAction*>(sender());
+    path = pluginPath.value( action->objectName());
+    loader->setFileName(path);
 
-    PluginWidget *plugin = qobject_cast<PluginWidget *>(loader->instance());
+    plugin = qobject_cast<PluginWidget *>(loader->instance());
     if(Q_NULLPTR == plugin) {
         qDebug()<< "error: " << action->objectName();
         return ;
     }
+
     plugin = plugin->newObj();
     ui->mdiArea->addSubWindow(plugin);
     plugin->show();
-    plugins.insert(plugin, loader);
+    plugins.append(plugin);
 }
