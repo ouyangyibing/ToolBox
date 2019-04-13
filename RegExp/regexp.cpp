@@ -20,12 +20,12 @@ QString patternToCode(QString pattern)
 
 void writeConfigFile(QString txt, QString name)
 {
-    my::writeFile(configPath + name, txt.toLocal8Bit());
+    My::writeFile(configPath + name, txt.toLocal8Bit());
 }
 
 QString readConfigFile(QString name)
 {
-    return my::readFile(configPath + name);
+    return My::readFile(configPath + name);
 }
 }//namespace end
 

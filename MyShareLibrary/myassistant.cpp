@@ -7,7 +7,7 @@
 #include <QMessageBox>
 #include <QTextStream>
 
-bool my::readFile(const QString &name, QString &data)
+bool My::readFile(const QString &name, QString &data)
 {
     QFile file(name);
     if(!file.exists()) {
@@ -26,14 +26,14 @@ bool my::readFile(const QString &name, QString &data)
     return true;
 }
 
-QString my::readFile(const QString &name)
+QString My::readFile(const QString &name)
 {
     QString buf;
     readFile(name, buf);
     return buf;
 }
 
-bool my::writeFile(const QString &name, const QByteArray &data, const QIODevice::OpenMode flags)
+bool My::writeFile(const QString &name, const QByteArray &data, const QIODevice::OpenMode flags)
 {
     QFileInfo fileInfo(name);
     QString path = fileInfo.path();
@@ -57,12 +57,12 @@ bool my::writeFile(const QString &name, const QByteArray &data, const QIODevice:
     return true;
 }
 
-bool my::appendFileData(const QString &name, const QByteArray &data)
+bool My::appendFileData(const QString &name, const QByteArray &data)
 {
     return writeFile(name, data, QIODevice::WriteOnly|QIODevice::Text|QIODevice::Append);
 }
 
-QString my::getCurentTime(const QString &format)
+QString My::getCurentTime(const QString &format)
 {
     return QDateTime::currentDateTime().toString(format);
 }

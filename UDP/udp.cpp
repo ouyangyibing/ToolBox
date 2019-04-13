@@ -46,7 +46,7 @@ void UDP::slot_readyRead()
         socket->readDatagram(datagram.data(), datagram.size(), &serverAddress, &serverPort);
 
         ui->recevieData->setTextColor(QColor("red"));
-        ui->recevieData->append(RECEIVE_HEAD.arg(my::getCurentTime())
+        ui->recevieData->append(RECEIVE_HEAD.arg(My::getCurentTime())
                                 .arg(serverAddress.toString())
                                 .arg(serverPort)
                                 .arg(datagram.length()));
@@ -107,7 +107,7 @@ void UDP::on_send_clicked()
     int length = socket->writeDatagram(sendData, address, port);
 
     ui->recevieData->setTextColor(QColor("darkgreen"));
-    ui->recevieData->append( SEND_HEAD.arg(my::getCurentTime())
+    ui->recevieData->append( SEND_HEAD.arg(My::getCurentTime())
                              .arg(address.toString())
                              .arg(port)
                              .arg(length));
@@ -121,7 +121,7 @@ void UDP::on_broadcast_clicked()
     int length = socket->writeDatagram(sendData, QHostAddress::Broadcast, port);
 
     ui->recevieData->setTextColor(QColor("darkgreen"));
-    ui->recevieData->append(SEND_HEAD.arg(my::getCurentTime())
+    ui->recevieData->append(SEND_HEAD.arg(My::getCurentTime())
                             .arg("Broadcast")
                             .arg(port)
                             .arg(length));
