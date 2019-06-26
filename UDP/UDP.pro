@@ -25,13 +25,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        udp.cpp
+    udp.cpp
 
 HEADERS += \
-        udp.h
+    udp.h
 
 FORMS += \
-        udp.ui
+    udp.ui
 
 
 DISTFILES += UDP.json

@@ -8,20 +8,20 @@
 class QUdpSocket;
 
 namespace Ui {
-class UDP;
+class Udp;
 }
 
-class UDP : public PluginWidget
+class Udp : public PluginWidget
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID PluginWidget_iid FILE "UDP.json")
     Q_INTERFACES(PluginWidget)
 
 public:
-    explicit UDP(QWidget *parent = 0);
-    ~UDP();
+    explicit Udp(QWidget *parent = 0);
+    ~Udp();
 
-    virtual UDP *newObj() Q_DECL_OVERRIDE;
+    virtual Udp *newObj() Q_DECL_OVERRIDE;
 
 private slots:
     void on_bind_clicked();
@@ -32,7 +32,7 @@ private slots:
     void on_broadcast_clicked();
 
 private:
-    Ui::UDP *ui;
+    Ui::Udp *ui;
 
     QUdpSocket *socket;
 
@@ -40,10 +40,10 @@ private:
     QHostAddress serverAddress;
     quint16 serverPort;
 
-    bool bindSocket();
+    bool bindPort();
     void closeSocket();
-    void bindSocket_ui();
-    void init_ui();
+    void setBindPortUi();
+    void setInitUi();
 };
 
 #endif // UDP_H

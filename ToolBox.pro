@@ -7,3 +7,4 @@ SUBDIRS += \
     UDP \
     RegExp \
     App \
+    TcpServer

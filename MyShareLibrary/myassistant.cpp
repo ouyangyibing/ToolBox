@@ -6,6 +6,7 @@
 #include <QDateTime>
 #include <QMessageBox>
 #include <QTextStream>
+#include <QApplication>
 
 bool My::readFile(const QString &name, QString &data)
 {
@@ -65,4 +66,13 @@ bool My::appendFileData(const QString &name, const QByteArray &data)
 QString My::getCurentTime(const QString &format)
 {
     return QDateTime::currentDateTime().toString(format);
+}
+
+void My::setStyle(const QString &style) {
+    qApp->setStyleSheet(readFile(style));
+}
+
+QString My::getAppPath()
+{
+    return QCoreApplication::applicationDirPath();
 }

@@ -27,6 +27,7 @@ QString readConfigFile(QString name)
 {
     return My::readFile(configPath + name);
 }
+
 }//namespace end
 
 RegExp::RegExp(QWidget *parent) :

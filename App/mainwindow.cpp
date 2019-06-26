@@ -49,8 +49,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
-    for(auto plugin : plugins)
-       delete plugin;
+    //for(auto plugin : plugins)
+       //delete plugin;
 
     delete ui;
 }

@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += widgets
+QT       += widgets network
 
 TARGET = MyShareLibrary
 TEMPLATE = lib
@@ -26,7 +26,7 @@ SOURCES += \
         myassistant.cpp
 
 HEADERS += \
-        myassistant.h \
+        myassistant.h
 
 unix {
     target.path = /usr/lib

@@ -9,36 +9,36 @@
 const QString SEND_HEAD = "【发送时间:%1 地址:%2 端口:%3 数据长度:%4】";
 const QString RECEIVE_HEAD = "【接收时间:%1 地址:%2 端口:%3 数据长度:%4】";
 
-UDP::UDP(QWidget *parent) :
+Udp::Udp(QWidget *parent) :
     PluginWidget(parent),
-    ui(new Ui::UDP)
+    ui(new Ui::Udp)
 {
     ui->setupUi(this);
 
     this->setWindowTitle("UDP网络调试助手 v1.0");
 
     socket = new QUdpSocket(this);
-    connect(socket, &QUdpSocket::readyRead, this, &UDP::slot_readyRead);
+    connect(socket, &QUdpSocket::readyRead, this, &Udp::slot_readyRead);
 
-    init_ui();
+    setInitUi();
 }
 
-void UDP::on_bind_clicked()
+void Udp::on_bind_clicked()
 {
     if(isBind) {
-        if(!bindSocket()) {
+        closeSocket();
+        setInitUi();
+
+    } else {
+        if(!bindPort()) {
             QMessageBox::warning(this, "警告", "监听失败！");
             return ;
         }
-        bindSocket_ui();
-
-    } else {
-        closeSocket();
-        init_ui();
+        setBindPortUi();
     }
 }
 
-void UDP::slot_readyRead()
+void Udp::slot_readyRead()
 {
     while (socket->hasPendingDatagrams()) {
         QByteArray datagram;
@@ -54,44 +54,44 @@ void UDP::slot_readyRead()
     }
 }
 
-bool UDP::bindSocket()
+bool Udp::bindPort()
 {
     quint16 port = ui->cltPort->text().toUInt();
     return socket->bind(port, QUdpSocket::DontShareAddress);
 }
 
-void UDP::closeSocket()
+void Udp::closeSocket()
 {
     socket->close();
 }
 
-void UDP::init_ui()
+void Udp::setInitUi()
 {
-    isBind = true;
+    isBind = false;
     ui->bind->setText("监听");
     ui->cltPort->setDisabled(false);
     ui->groupBox_send->setDisabled(true);
 }
 
-void UDP::bindSocket_ui()
+void Udp::setBindPortUi()
 {
-    isBind = false;
+    isBind = true;
     ui->bind->setText("关闭");
     ui->cltPort->setDisabled(true);
     ui->groupBox_send->setDisabled(false);
 }
 
-UDP::~UDP()
+Udp::~Udp()
 {
     delete ui;
 }
 
-UDP *UDP::newObj()
+Udp *Udp::newObj()
 {
     static bool flag = false;
 
     if(flag) {
-        return new UDP();
+        return new Udp();
 
     } else {
         flag = true;
@@ -99,7 +99,7 @@ UDP *UDP::newObj()
     }
 }
 
-void UDP::on_send_clicked()
+void Udp::on_send_clicked()
 {
     QHostAddress address(ui->srvIp->text());
     quint16 port = ui->srvPort->text().toUInt();
@@ -114,7 +114,7 @@ void UDP::on_send_clicked()
     ui->recevieData->append(QString::fromLocal8Bit(sendData));
 }
 
-void UDP::on_broadcast_clicked()
+void Udp::on_broadcast_clicked()
 {
     quint16 port = ui->srvPort->text().toUInt();
     QByteArray sendData = ui->sendData->toPlainText().toLocal8Bit();

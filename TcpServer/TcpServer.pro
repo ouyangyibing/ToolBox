@@ -1,15 +1,16 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2019-03-26T14:50:10
+# Project created by QtCreator 2019-04-16T14:33:23
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = App
-TEMPLATE = app
+TARGET = TcpServer
+TEMPLATE = lib
+CONFIG += plugin
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
@@ -24,24 +25,25 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        main.cpp \
-        mainwindow.cpp \
-    test.cpp
+    tcpserver.cpp \
+    tcpsocket.cpp
 
 HEADERS += \
-        mainwindow.h \
-    test.h
+    tcpserver.h \
+    tcpsocket.h
 
 FORMS += \
-        mainwindow.ui
+    tcpserver.ui
 
-DESTDIR = ../bin
+DESTDIR = ../bin/plugins
+
+DEPENDPATH += ../bin
 
 INCLUDEPATH += $$PWD/../PluginWidget
+LIBS += -L../bin/ -lPluginWidget
 
 INCLUDEPATH += $$PWD/../MyShareLibrary
 LIBS += -L../bin/ -lMyShareLibrary
 
-RESOURCES +=
-
-DISTFILES +=
+DISTFILES +=  \
+    TcpServer.json

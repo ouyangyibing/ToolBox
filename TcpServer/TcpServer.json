@@ -1,0 +1,7 @@
+{
+    "group" : "工具",
+    "name"  : "TcpServer",
+    "version" : "v1.0",
+    "dependencies" : [
+    ]
+}
